@@ -14,26 +14,16 @@ app.on('ready', () => {
   win.loadURL('file://' + __dirname + '/index.html')
 
   const state = {}
-  const objects = [{
-    id: 1
-  }, {
-    id: 2
-  }, {
-    id: 3
-  }]
+  const object = { 'prop': 1 }
 
-  state.objects = objects
+  state.firstReference = object
+  state.brokenReference = object
 
   let current = 0
 
   win.webContents.on('did-finish-load', function() {
-    setInterval(() => {
-      current = (current + 1) % objects.length
-      state.copiedReference = Object.assign({}, objects[current])
-      state.brokenReference = objects[current]
-      console.log('setting state', state)
-      win.webContents.send('update', state)
-    }, 1000)
+    console.log('sending state', state)
+    win.webContents.send('update', state)
   });
 
 })
