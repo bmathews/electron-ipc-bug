@@ -19,8 +19,6 @@ app.on('ready', () => {
   state.firstReference = object
   state.brokenReference = object
 
-  let current = 0
-
   win.webContents.on('did-finish-load', function() {
     console.log('sending state', state)
     win.webContents.send('update', state)
