@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head></head>
+  <body>
+    <h1>app</h1>
+    <script>
+      'use strict'
+
+      const electron = require('electron')
+      const ipc = electron.ipcRenderer
+
+      let state = {}
+      ipc.on('update', (sender, newState) => {
+        state = newState
+        console.log(state)
+      })
+    </script>
+  </body>
+</html>
